@@ -11,4 +11,9 @@ At the end of this tutorial, you will have had a complete step-by-step walk thor
 # Work in progress...
 
 # General RNA-seq workflow
-- Raw reads
+- Preprocessing - Raw data QC 
+- Mapping/quantification
+- Sample-level assessment
+- Count modeling and hypothesis testing
+- Visualization of results
+- Functional analysis
