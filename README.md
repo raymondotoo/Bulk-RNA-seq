@@ -6,7 +6,7 @@
 
 This resource demonstrates with a step-by-step tutorial, an end-to-end RNA seq pipeline. Generally, from my experience, having a reproducible bioinformatics pipeline has been very difficult to achieve. As a results, curious learners often times find it difficult to navigate through and complete most of the very few complete bioinformatics analysis pipelines. To address this challenge, this resource is being developed. To resolve the reprodicibility challenges resulting from dependencies conflicts, this tutotial together with all of the resources contained herein will be containerized using docker. 
 
-At the end of this tutorial, you will have had a complete step-by-step walk thorugh of an RNA-seq pipeline
+At the end of this tutorial, you will have had a complete step-by-step walk through of an RNA-seq pipeline
 
 # Work in progress...
 
