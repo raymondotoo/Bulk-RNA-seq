@@ -6,3 +6,6 @@
 
 Demonstrates with a step-by-step tutorial, an end-to-end RNA seq pipeline. 
 # Work in progress...
+
+# General RNA-seq workflow
+- Raw reads
