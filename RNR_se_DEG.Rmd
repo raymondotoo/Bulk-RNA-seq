@@ -76,7 +76,6 @@ SRR8288566 = unname(treat3_fc_24h$counts)
 )
 ```
 
-
 ```{r}
 #take a look at what the first few lines (top) of the merged counts data frame looks like.
 head(tribolium_counts)
