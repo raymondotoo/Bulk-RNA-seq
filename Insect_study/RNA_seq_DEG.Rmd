@@ -95,3 +95,187 @@ dim(tribolium_counts)
 write.csv(tribolium_counts, "triboliumCounts.csv")
 ```
 
+```{r}
+#setwd("/Volumes/RayExternal/RNA_seq/Bulk-RNA-seq/Insect_study")
+count_data <- read.csv("triboliumCounts.csv",row.names = 1)
+count_data
+```
+```{r}
+# R version  
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("DESeq2")
+```
+
+
+```{r}
+# load library 
+# DESeq2 version 1.34.0
+library("DESeq2")
+
+# view first two rows
+head(count_data, 2)
+```
+
+```{r}
+coldata <- data.frame(
+   sample = c( "SRR8288561", 
+               "SRR8288562", 
+               "SRR8288563", 
+               "SRR8288558", 
+               "SRR8288567",
+               "SRR8288568",
+               "SRR8288564",
+               "SRR8288557",
+               "SRR8288560",
+               "SRR8288559",
+               "SRR8288565",
+               "SRR8288566" )
+   ,
+   condition = c( "control", 
+                  "control", 
+                  "control",
+                  "control", 
+                  "control",  
+                  "control", 
+                  "treated", 
+                  "treated",
+                  "treated", 
+                  "treated", 
+                  "treated", 
+                  "treated" ), 
+  row.names = "sample" )
+coldata$condition <- as.factor(coldata$condition)
+
+coldata
+```
+
+```{r}
+all(rownames(coldata) %in% colnames(count_data))
+```
+
+```{r}
+all(rownames(coldata) == colnames(count_data))
+```
+
+```{r}
+dds <- DESeqDataSetFromMatrix(countData = count_data, colData = coldata, 
+                              design = ~ condition)
+```
+
+```{r}
+dds <- dds[rowSums(counts(dds)) >= 10,]
+```
+
+```{r}
+# set control condition as reference
+dds$condition <- relevel(dds$condition, ref = "control")
+```
+
+
+```{r}
+dds <- DESeq(dds)
+```
+
+```{r}
+resultsNames(dds)
+```
+
+
+```{r}
+# get gene expression table
+# at this step independent filtering is applied by default to remove low count genes
+# independent filtering can be turned off by passing independentFiltering=FALSE to results
+res <- results(dds)  # same as results(dds, name="condition_infected_vs_control") or results(dds, contrast = c("condition", "infected", "control") )
+res
+```
+
+
+```{r}
+#Order gene expression table by adjusted p value (Benjamini-Hochberg FDR method)
+res[order(res$padj),]  
+```
+
+```{r}
+#Export differential gene expression analysis table to CSV file
+write.csv(as.data.frame(res[order(res$padj),] ), file="condition_infected_vs_control_dge.csv")
+```
+
+```{r}
+#Get summary of differential gene expression with adjusted p value cut-off at 0.05
+summary(results(dds, alpha=0.05))
+```
+
+```{r}
+#Get normalized counts
+normalized_counts <- counts(dds, normalized=TRUE)
+head(normalized_counts)
+```
+
+```{r}
+#MA-plot
+plotMA(dds)
+```
+```{r}
+# Transform count data using the variance stablilizing transform
+deseq2VST <- vst(dds)
+```
+
+```{r}
+# Convert the DESeq transformed object to a data frame
+deseq2VST <- assay(deseq2VST)
+deseq2VST <- as.data.frame(deseq2VST)
+#deseq2VST$Gene <- rownames(deseq2VST)
+head(deseq2VST)
+```
+
+```{r}
+var_genes <- apply(deseq2VST, 1, var)
+head(var_genes)
+```
+```{r}
+var_genes
+```
+```{r}
+# Get the gene names for the top 500 most variable genes
+select_var <- names(sort(var_genes, decreasing=TRUE))[1:500]
+head(select_var)
+```
+
+```{r}
+# Subset logcounts matrix
+highly_variable_lcpm <- deseq2VST[select_var,]
+dim(highly_variable_lcpm)
+```
+
+```{r}
+head(highly_variable_lcpm)
+```
+```{r}
+#After applying the scaling procedure, the gene expression levels become more comparable. Still, this heatmap isn’t really useful so far.
+library(pheatmap)
+
+pheatmap(highly_variable_lcpm, 
+         cluster_rows = FALSE, 
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         scale = "none",            # already done "manually"
+         show_colnames = TRUE)
+
+```
+
+```{r}
+#Let’s compare how it looks with both gene and sample clustering.
+pheatmap(highly_variable_lcpm, 
+         cluster_rows = TRUE,                      
+         cluster_cols = TRUE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         main = "Clustering on")
+```
+```{r}
+# References for heatmap
+#https://scienceparkstudygroup.github.io/rna-seq-lesson/06-differential-analysis/index.html
+```
+
