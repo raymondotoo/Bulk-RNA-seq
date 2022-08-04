@@ -19,6 +19,6 @@ At the end of this tutorial, you will have had a complete step-by-step walk thro
 - Functional analysis
 
 # Data
-- The data used for this study is from a set of 14 paired chinese individuals having the prostate cancer condition. 
-- Link to data https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-567/samples/ 
+- Data used for this study is from the paper "Digital gene expression profiling in larvae of Tribolium castaneum at different periods post UV-B exposure". 
+- Link to : https://www.sciencedirect.com/science/article/pii/S0147651319302684
 - Read the paper to better understand the data https://www.nature.com/articles/cr201361
