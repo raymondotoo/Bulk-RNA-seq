@@ -2,7 +2,9 @@
 title: "RNA_seq_DEG"
 author: "Raymond Anan Otoo"
 date: "8/3/2022"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 ```{r}
 
@@ -13,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-install.packages("BiocManager")
+#install.packages("BiocManager")
 ```
 
 ```{r}
