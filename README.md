@@ -6,7 +6,7 @@
 
 This resource demonstrates with a step-by-step tutorial, an end-to-end RNA seq pipeline. Generally, from my experience, having a reproducible bioinformatics pipeline has been very difficult to achieve. As a results, curious learners often times find it difficult to navigate through and complete most of the very few complete bioinformatics analysis pipelines. To address this challenge, this resource is being developed. To resolve the reprodicibility challenges resulting from dependencies conflicts, this tutotial together with all of the resources contained herein will be containerized using docker. 
 
-At the end of this tutorial, you will have had a complete step-by-step walk through of an RNA-seq pipeline
+At the end of this tutorial, you will have had a complete step-by-step walk through of an RNA-seq pipeline with a full real world example. Data used is from and insect and as such presents an opportunity to be able to run the entire analysis on your personal computer (since the genome is fairly small). 
 
 # Work in progress...
 
@@ -21,4 +21,4 @@ At the end of this tutorial, you will have had a complete step-by-step walk thro
 # Data
 - Data used for this study is from the paper "Digital gene expression profiling in larvae of Tribolium castaneum at different periods post UV-B exposure". 
 - Link to : https://www.sciencedirect.com/science/article/pii/S0147651319302684
-- Read the paper to better understand the data https://www.nature.com/articles/cr201361
+- Read the paper to better understand the data.
