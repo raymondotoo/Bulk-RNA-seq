@@ -1,0 +1,89 @@
+---
+title: "RNA_seq_DEG"
+author: "Raymond Anan Otoo"
+date: "8/3/2022"
+output: html_document
+---
+```{r}
+
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+install.packages("BiocManager")
+```
+
+```{r}
+if (!require("BiocManager", quietly = TRUE))
+install.packages("BiocManager")
+BiocManager::install("Rsubread")
+```
+
+```{r}
+#load the Rsubread library before you attempt to use the featureCounts
+library(Rsubread)
+```
+
+```{r}
+#set working directory
+setwd("/Volumes/RayExternal/RNA_seq")
+```
+
+
+```{r}
+#Notice that with each use of the featureCounts command the sam file is specified using the files argument. The general features file (e.g., Tribolium.gtf) is specified with the annot.ext argument. Additionally, we need to set isGTFAnnotationFile equal to TRUE since we are using a gtf formatted general features file. 
+
+# control samples at 4h
+cntrl1_fc_4h <- featureCounts(files="SRR8288561_accepted_hits.sam", annot.ext="Tribolium.gtf", isGTFAnnotationFile=TRUE)
+cntrl2_fc_4h <- featureCounts(files="SRR8288562_accepted_hits.sam", annot.ext="Tribolium.gtf", isGTFAnnotationFile=TRUE)
+cntrl3_fc_4h <- featureCounts(files="SRR8288563_accepted_hits.sam", annot.ext="Tribolium.gtf", isGTFAnnotationFile=TRUE)
+
+# control samples 24h
+#cntrl1_fc_24h <- featureCounts(files="SRR8288558_accepted_hits.sam", annot.ext="Tribolium.gtf", isGTFAnnotationFile=TRUE)
+#cntrl2_fc_24h <- featureCounts(files="SRR8288567_accepted_hits.sam", annot.ext="Tribolium.gtf", isGTFAnnotationFile=TRUE)
+#cntrl3_fc_24h <- featureCounts(files="SRR8288568_accepted_hits.sam", annot.ext="Tribolium.gtf", isGTFAnnotationFile=TRUE)
+
+# treatment samples at 4h
+#treat1_fc_4h <- featureCounts(files="SRR8288564_accepted_hits.sam", annot.ext="Tribolium.gtf", isGTFAnnotationFile=TRUE)
+#treat2_fc_4h <- featureCounts(files="SRR8288557_accepted_hits.sam", annot.ext="Tribolium.gtf", isGTFAnnotationFile=TRUE)
+#treat3_fc_4h <- featureCounts(files="SRR8288560_accepted_hits.sam", annot.ext="Tribolium.gtf", isGTFAnnotationFile=TRUE)
+
+# treatment samples 24h
+#treat1_fc_24h <- featureCounts(files="SRR8288559_accepted_hits.sam", annot.ext="Tribolium.gtf", isGTFAnnotationFile=TRUE)
+#treat2_fc_24h <- featureCounts(files="SRR8288565_accepted_hits.sam", annot.ext="Tribolium.gtf", isGTFAnnotationFile=TRUE)
+#treat3_fc_24h <- featureCounts(files="SRR8288566_accepted_hits.sam", annot.ext="Tribolium.gtf", isGTFAnnotationFile=TRUE)
+```
+
+```{r}
+#Before we can move on to any statistical analysis, we need to prepare the data by combining (merging) all of the results for each quantified sam file to a single data frame. Note that data frames in R are used to store two-dimensional (2D) data.
+
+tribolium_counts <- data.frame(
+SRR8288561 = unname(cntrl1_fc_4h$counts),
+SRR8288562 = unname(cntrl2_fc_4h$counts),
+SRR8288563 = unname(cntrl3_fc_4h$counts)
+)
+```
+
+
+```{r}
+#take a look at what the first few lines (top) of the merged counts data frame looks like.
+head(tribolium_counts)
+```
+```{r}
+#set the row names of the merged counts data frame using the row names from a data frame since they all have the same number of rows and rownames for one of the samples as follows.
+rownames(tribolium_counts) <- rownames(cntrl1_fc_4h$counts)
+
+#take a peak at the data to be sure they actually merged
+head(tribolium_counts)
+
+#check the dimensions of the data to see the total number of features that were tested against the samples considered.
+dim(tribolium_counts)
+```
+
+```{r}
+write.csv(tribolium_counts, "triboliumCounts.csv")
+```
+
