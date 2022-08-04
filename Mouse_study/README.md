@@ -23,6 +23,6 @@ Insert workflow image here...
 - Functional analysis
 
 # Data
-- Data used for this study is from the paper "Digital gene expression profiling in larvae of Tribolium castaneum at different periods post UV-B exposure". 
-- Link to : https://www.sciencedirect.com/science/article/pii/S0147651319302684
+- Data used for this study is from a mouse study.12 fastq files with 1000 reads each, 4 index files for chr 1 for mm10, targets files with sample information
+- Data: Mouse mammary data (fastq files): https://figshare.com/s/f5d63d8c265a05618137
 - Read the paper to better understand the data.
