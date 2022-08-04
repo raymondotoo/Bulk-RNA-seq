@@ -18,6 +18,10 @@ At the end of this tutorial, you will have had a complete step-by-step walk thro
 - Visualization of results
 - Functional analysis
 
+# General RNA-seq workflow
+- Preprocessing - Raw data QC 
+
+
 # Data
 - Data used for this study is from the paper "Digital gene expression profiling in larvae of Tribolium castaneum at different periods post UV-B exposure". 
 - Link to : https://www.sciencedirect.com/science/article/pii/S0147651319302684
