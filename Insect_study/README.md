@@ -1,4 +1,7 @@
 # Bulk-RNA-seq
+
+- Reference : https://morphoscape.wordpress.com/2022/07/28/bioinformatics-analysis-of-omics-data-with-the-shell-r/
+
 [![LICENSE](https://img.shields.io/github/license/rayotoo/Bulk-RNA-seq?style=flat-square&color=green)](https://github.com/rayotoo/Bulk-RNA-seq/blob/main/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/rayotoo/Bulk-RNA-seq?style=flat-square)](https://github.com/rayotoo/Bulk-RNA-seq/issues)
 [![GitHub stars](https://img.shields.io/github/stars/rayotoo/Bulk-RNA-seq?style=flat-square&color=important)](https://github.com/rayotoo/Bulk-RNA-seq/stargazers)
