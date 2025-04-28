@@ -1,4 +1,6 @@
 # Bulk-RNA-seq [![CI](https://github.com/rayotoo/Bulk-RNA-seq/actions/workflows/blank.yml/badge.svg)](https://github.com/rayotoo/Bulk-RNA-seq/actions/workflows/blank.yml)
 Demonstrates with a step-by-step tutorial, an end-to-end RNA seq pipeline using data from an insect study.
 
+[![Update README Date](https://github.com/rayotoo/Bulk-RNA-seq/actions/workflows/update_readme.yml/badge.svg)](https://github.com/rayotoo/Bulk-RNA-seq/actions/workflows/update_readme.yml)
+
 Last updated: 2025-04-28
