@@ -1,1 +1,49 @@
+name: Update README Date
+
+on:
+  push:
+    branches:
+      - main # Or your default branch name
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
+
+permissions:
+  contents: write # This grants write permission to the repository's contents
+
+jobs:
+  update-date:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set current date
+        id: date
+        run: echo "DATE=$(date '+%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Update README
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const readmePath = process.env.README_PATH;
+            let content = fs.readFileSync(readmePath, 'utf8');
+            const dateRegex = /(Last updated: ).*$/m;
+            const newDateLine = `Last updated: ${{ steps.date.outputs.DATE }}`;
+
+            if (content.match(dateRegex)) {
+              content = content.replace(dateRegex, newDateLine);
+            } else {
+              content += `\n\nLast updated: ${{ steps.date.outputs.DATE }}`;
+            }
+
+            fs.writeFileSync(readmePath, content);
+        env:
+          README_PATH: README.md # Adjust if your README has a different name
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Automated: Update README date"
+          push_options: '--force' # Be cautious with --force if others are collaborating
 
