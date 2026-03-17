@@ -3,4 +3,4 @@
 
 Demonstrates with a step-by-step tutorial, an end-to-end RNA seq pipeline using data from an insect study..
 
-Last updated: 2026-03-16
+Last updated: 2026-03-17
